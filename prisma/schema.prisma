@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum FaixaIdade {
+  ZERO_3
+  QUATRO_6
+  SEIS_9
+  NOVE_12
+  UM_MAIS
+}
+
+enum StatusAssinatura {
+  ATIVA
+  CANCELADA
+  EXPIRADA
+}
+
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  criadoEm      DateTime     @default(now())
+  inicioPrograma DateTime?
+  bebe           Bebe?
+  assinatura     Assinatura?
+  progressos     Progresso[]
+
+  @@map("users")
+}
+
+model Bebe {
+  id         String          @id @default(cuid())
+  userId     String          @unique
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nome       String?
+  faixaIdade FaixaIdade
+  criadoEm  DateTime        @default(now())
+  entradas   EntradaDiario[]
+
+  @@map("bebes")
+}
+
+model Assinatura {
+  id            String           @id @default(cuid())
+  userId        String           @unique
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status        StatusAssinatura @default(ATIVA)
+  kiwifyOrderId String?
+  expiraEm      DateTime?
+  criadoEm     DateTime         @default(now())
+  atualizadoEm DateTime         @updatedAt
+
+  @@map("assinaturas")
+}
+
+model Progresso {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  data      DateTime @db.Date
+  semana    Int
+  tarefaIds String[]
+  concluido Boolean  @default(false)
+
+  @@unique([userId, data])
+  @@map("progressos")
+}
+
+model EntradaDiario {
+  id          String   @id @default(cuid())
+  bebeId      String
+  bebe        Bebe     @relation(fields: [bebeId], references: [id], onDelete: Cascade)
+  data        DateTime @db.Date
+  horaDormir  String?
+  horaAcordar String?
+  despertares Int      @default(0)
+  notas       String?
+  criadoEm   DateTime @default(now())
+
+  @@unique([bebeId, data])
+  @@map("entradas_diario")
+}

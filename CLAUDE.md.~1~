@@ -1,0 +1,269 @@
+# Noches Tranquilas — Regras do Projeto
+
+## Visão Geral
+
+Web App de acompanhamento do método de sono do bebê. Programa de 3 meses (12 semanas) baseado no Método das 12 Horas (Suzy Giordano). Voltado para mães brasileiras, interface em português.
+
+**Stack:** Next.js (App Router) · Prisma ORM · Supabase (Auth + DB) · Kiwify Webhook
+
+**Docs do projeto:** `/docs/`
+- `prd-app-rotina-sono-bebe.md` — PRD completo
+- `Plano_Acompanhamento_3_Meses_Metodo_Sono.md` — estrutura do programa de 12 semanas
+- `Metodo_12_Horas_Sono_Bebe_1_Ano.md` — detalhes do método
+
+---
+
+## Design System
+
+### Identidade Visual
+
+**App:** Noches Tranquilas
+**Logo:** `/logo/logo-vertical.jpg` (ícone de lua com bebê dormindo + estrelas)
+**Logo horizontal:** `/logo/logo-horizontal.jpg`
+**Favicon:** `/logo/favicon.ico`
+
+**Referência de UI:** `/references/afb974a1b8898a227d234611fbbb2f13.jpg`
+- App de agendamento médico com design limpo, moderno e acolhedor
+- Cards com cantos arredondados, sombra suave
+- Header com fundo na cor primária
+- Scroll horizontal para seleção (datas, horários)
+- Botão CTA pill/arredondado na cor primária
+
+---
+
+### Paleta de Cores
+
+```
+Primary:          #217587   (teal escuro — cor principal da marca)
+Primary Dark:     #1a5e6e   (hover, estados ativos)
+Primary Light:    #e8f4f7   (backgrounds suaves, tags, badges)
+Primary Tint:     #d0eaf0   (seleção suave, fundo de cards destacados)
+
+Surface:          #ffffff   (fundo de cards)
+Background:       #f5f8f9   (fundo geral das telas)
+Border:           #e2edf0   (divisores, bordas de cards)
+
+Text Primary:     #1a2e35   (títulos, texto principal)
+Text Secondary:   #5a7a82   (subtítulos, labels)
+Text Muted:       #9ab3b9   (placeholders, textos desabilitados)
+
+Success:          #22c55e   (tarefas concluídas, progresso positivo)
+Warning:          #f59e0b   (alertas, regressões de sono)
+Error:            #ef4444   (erros, validações)
+```
+
+---
+
+### Tipografia
+
+**Família principal:** Inter (Google Fonts)
+**Família de apoio:** Nunito (cabeçalhos, elementos de marca — estilo próximo ao logo)
+
+```
+Heading XL:   Nunito, 28px, Bold (700)    — títulos de tela
+Heading L:    Nunito, 22px, SemiBold (600) — seções principais
+Heading M:    Inter,  18px, SemiBold (600) — títulos de card
+Body L:       Inter,  16px, Regular (400)  — texto corrido
+Body M:       Inter,  14px, Regular (400)  — labels, descrições
+Caption:      Inter,  12px, Regular (400)  — metadata, timestamps
+```
+
+---
+
+### Espaçamento e Layout
+
+```
+Escala base: 4px
+
+xs:   4px
+sm:   8px
+md:   16px
+lg:   24px
+xl:   32px
+2xl:  48px
+3xl:  64px
+
+Container max-width: 430px (mobile-first, web app)
+Padding lateral padrão: 20px
+```
+
+---
+
+### Componentes UI
+
+#### Cards
+```css
+border-radius: 16px
+box-shadow: 0 2px 12px rgba(33, 117, 135, 0.08)
+background: #ffffff
+padding: 16px
+```
+
+#### Botões
+
+**Primário (CTA):**
+```css
+background: #217587
+color: #ffffff
+border-radius: 50px  /* pill */
+padding: 14px 24px
+font: Inter 16px SemiBold
+```
+
+**Secundário:**
+```css
+background: #e8f4f7
+color: #217587
+border-radius: 50px
+padding: 14px 24px
+```
+
+**Ghost:**
+```css
+background: transparent
+border: 1.5px solid #217587
+color: #217587
+border-radius: 50px
+```
+
+#### Chips / Tags de Seleção
+```css
+/* Não selecionado */
+background: #f5f8f9
+color: #5a7a82
+border-radius: 50px
+padding: 8px 16px
+
+/* Selecionado */
+background: #217587
+color: #ffffff
+border-radius: 50px
+padding: 8px 16px
+```
+
+#### Progress Bar
+```css
+background (track): #e8f4f7
+background (fill): #217587
+border-radius: 50px
+height: 8px
+```
+
+#### Header de Tela
+```css
+background: #217587  /* ou gradiente: linear-gradient(135deg, #217587, #1a5e6e) */
+color: #ffffff
+padding: 20px 20px 28px
+border-radius: 0 0 24px 24px
+```
+
+#### Bottom Navigation
+```css
+background: #ffffff
+border-top: 1px solid #e2edf0
+padding: 8px 0
+/* ícone ativo: #217587 */
+/* ícone inativo: #9ab3b9 */
+```
+
+---
+
+### Iconografia
+
+Biblioteca: **Lucide React** (consistente com o estilo do design)
+
+Ícones principais do app:
+- `Moon` — sono / home
+- `Sun` — rotina diurna
+- `CheckCircle` — tarefa concluída
+- `Clock` — horários
+- `Calendar` — programa / semanas
+- `BookOpen` — conteúdos educativos
+- `User` — perfil
+- `Baby` — cadastro do bebê
+- `TrendingUp` — progresso
+- `Star` — destaques / conquistas
+
+---
+
+### Padrões de UI
+
+- **Mobile-first:** max-width 430px, centralizado em desktop
+- **Cards arredondados** (border-radius 16px) como unidade principal de layout
+- **Scroll horizontal** para seleção de semanas, fases e horários
+- **Feedback imediato** ao marcar tarefas (animação de check)
+- **Progress circular** para percentual de conclusão do dia/semana
+- **Header colorido** com gradiente da cor primária nas telas principais
+- **Bottom tab navigation** com 5 itens: Hoje · Programa · Diário · Conteúdos · Perfil
+
+---
+
+## Arquitetura do App
+
+### Estrutura de Rotas (Next.js App Router)
+
+```
+/                        → redirect para /dashboard
+/login                   → autenticação
+/onboarding              → cadastro do bebê (pós-ativação)
+/dashboard               → tela principal do dia
+/programa                → visão das 12 semanas
+/programa/[semana]       → detalhes da semana
+/diario                  → diário do sono e histórico
+/conteudos               → artigos e dicas
+/conteudos/[slug]        → artigo individual
+/perfil                  → dados do bebê e assinatura
+/api/webhooks/kiwify     → endpoint do webhook
+```
+
+### Proteção de Rotas
+
+- Middleware verifica sessão Supabase em todas as rotas privadas
+- Usuários sem assinatura ativa redirecionados para página de bloqueio
+- Usuários sem bebê cadastrado redirecionados para `/onboarding`
+
+---
+
+## Convenções de Código
+
+- Componentes em PascalCase: `DayTaskCard.tsx`
+- Hooks com prefixo `use`: `usePrograma.ts`, `useBebe.ts`
+- Server Actions em `actions/`: `actions/tarefas.ts`
+- Tipos em `types/`: `types/programa.ts`
+- Dados do método (rotinas, tarefas) em `data/`: `data/rotinas.ts`, `data/fases.ts`
+- Variáveis CSS/Tailwind da paleta definidas em `tailwind.config.ts`
+
+---
+
+## Contexto do Domínio
+
+### Fases do Programa
+
+| Fase | Semanas | Nome | Frequência de Acompanhamento |
+|------|---------|------|------------------------------|
+| 1 | 1–2 | Preparação | Semanal |
+| 2 | 3–4 | Implementação | Semanal |
+| 3 | 5–8 | Consolidação | Quinzenal |
+| 4 | 9–12 | Manutenção | Quinzenal |
+
+### Faixas de Idade do Bebê
+
+| Faixa | Sonecas | Hora de dormir | Meta noturna |
+|-------|---------|----------------|--------------|
+| 0–3 meses | 4–5 | ~20:00 | 5–6h corridas |
+| 4–6 meses | 3–4 | ~19:30 | 8–10h |
+| 6–9 meses | 2–3 | ~19:00 | 10–11h |
+| 9–12 meses | 2 | ~19:00 | 11h |
+| 1+ ano | 1–2 | ~19:00 | 11–12h |
+
+### Rotina Noturna Padrão (1+ ano)
+
+```
+18:30 — Início da rotina
+19:00 — Banho relaxante (5–10 min)
+19:15 — Pijama + luz baixa
+19:20 — Mamada final (se aplicável)
+19:30 — História curta
+19:45 — Berço (bebê acordado)
+19:00 — Dormir
+```

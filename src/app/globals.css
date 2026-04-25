@@ -1,26 +1,112 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand palette */
+  --color-primary: #217587;
+  --color-primary-dark: #1a5e6e;
+  --color-primary-light: #e8f4f7;
+  --color-primary-tint: #d0eaf0;
+  --color-surface: #ffffff;
+  --color-bg-app: #f5f8f9;
+  --color-border-app: #e2edf0;
+  --color-text-primary: #1a2e35;
+  --color-text-secondary: #5a7a82;
+  --color-text-muted: #9ab3b9;
+
+  /* shadcn tokens */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #f5f8f9;
+  --foreground: #1a2e35;
+  --card: #ffffff;
+  --card-foreground: #1a2e35;
+  --popover: #ffffff;
+  --popover-foreground: #1a2e35;
+  --primary: #217587;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f4f7;
+  --secondary-foreground: #217587;
+  --muted: #e8f4f7;
+  --muted-foreground: #5a7a82;
+  --accent: #d0eaf0;
+  --accent-foreground: #1a2e35;
+  --destructive: #ef4444;
+  --border: #e2edf0;
+  --input: #e2edf0;
+  --ring: #217587;
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-[#f5f8f9] text-[#1a2e35];
+    font-family: var(--font-inter), sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-nunito), sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .glass {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .glass-strong {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+  }
+  .card-surface {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(33, 117, 135, 0.07), 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
