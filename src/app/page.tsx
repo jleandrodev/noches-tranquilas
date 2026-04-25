@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { CheckCircle2, Star, Shield, Zap, Moon, Clock, TrendingUp, Baby, ChevronDown } from "lucide-react";
 
 const CHECKOUT_URL = "https://buy.stripe.com/14AbJ021Q8ADdoMdy81Jm00";
@@ -36,6 +37,11 @@ const features = [
 
 export default function HomePage() {
   return (
+    <>
+      <Script
+        src="https://assets.mycartpanda.com/cartx-ecomm-ui-assets/js/cpsales.js"
+        strategy="beforeInteractive"
+      />
     <main className="bg-white font-[family-name:var(--font-inter)] text-[#1a2e35]">
       <style>{`
         @keyframes pulse-cta {
@@ -544,5 +550,6 @@ export default function HomePage() {
         </div>
       </footer>
     </main>
+    </>
   );
 }
