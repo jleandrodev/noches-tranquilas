@@ -2,7 +2,7 @@ export type FaixaIdade = "ZERO_3" | "QUATRO_6" | "SEIS_9" | "NOVE_12" | "UM_MAIS
 
 export type StatusAssinatura = "ATIVA" | "CANCELADA" | "EXPIRADA";
 
-export type TipoAcompanhamento = "semanal" | "quinzenal";
+export type TipoAcompanhamento = "semanal" | "quinzenal" | "quincenal";
 
 export interface Tarefa {
   id: string;
