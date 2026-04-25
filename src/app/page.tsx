@@ -3,7 +3,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { CheckCircle2, Star, Shield, Zap, Moon, Clock, TrendingUp, Baby, ChevronDown } from "lucide-react";
 
-const CHECKOUT_URL = "https://buy.stripe.com/14AbJ021Q8ADdoMdy81Jm00";
+const CHECKOUT_URL = "https://nutrahub-life.mycartpanda.com/checkout?subscription=4263";
 
 function StarRow() {
   return (
